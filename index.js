@@ -62,7 +62,7 @@ app.use(
 );
 app.use(cors(
     {
-        origin: ["http://localhost:3000"],
+        origin: ["http://localhost:3000", "https://google-reviews-fe.vercel.app"],
         credentials: true
     }
 ));
