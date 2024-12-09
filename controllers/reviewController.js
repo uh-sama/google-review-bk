@@ -8,7 +8,13 @@ const getLocationReviews = async (req, res, next) => {
         const placeId = await getPlaceDetails(req.body.location);
         const placeReviews = await getReviews(placeId);
         console.log(placeReviews);
-        await Review.insertMany(placeReviews);
+        const existingReview = await Review.findOne({ name: placeReviews.name });
+        if (existingReview) {
+            await Review.findByIdAndUpdate(existingReview.id, placeReviews);
+        }
+        else {
+            await Review.insertMany(placeReviews);
+        }
         res.status(200).json({ message: "Successful", data: placeReviews });
     } catch (error) {
         next(new AppError(error.message, 500));
