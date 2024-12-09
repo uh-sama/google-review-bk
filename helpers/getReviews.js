@@ -34,9 +34,7 @@ async function getReviews(placeId) {
                     }
 
                     return {
-                        author: review.author_name,
-                        date: review.relative_time_description,
-                        text: review.text,
+                        ...review,
                         sentiment: sentimentLabel,
                     };
                 })
